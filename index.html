@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5"></script>
+  <title>SweetAlert Buttons and Features</title>
+</head>
+<body>
+
+<div class="container mt-5">
+  <h2 class="text-center">SweetAlert Buttons and Features</h2>
+  <p class="text-center">Click the buttons below to see different SweetAlert functionalities:</p>
+
+  <!-- Success Button -->
+  <button class="btn btn-success" id="successButton">Success Button</button>
+
+  <!-- Error Button -->
+  <button class="btn btn-danger" id="errorButton">Error Button</button>
+
+  <!-- Loading Button -->
+  <button class="btn btn-primary" id="loadingButton">Loading Button</button>
+
+  <!-- Show Input using SweetAlert -->
+  <button class="btn btn-info" id="inputButton">Show Input</button>
+
+  <!-- Confirm Button -->
+  <button class="btn btn-warning" id="confirmButton">Confirm Action</button>
+
+  <!-- Info Button -->
+  <button class="btn btn-info" id="infoButton">Info</button>
+
+  <!-- Custom Content Button -->
+  <button class="btn btn-secondary" id="customContentButton">Custom Content</button>
+  
+  <!-- Created by and Website Info -->
+  <div class="mt-4 text-center">
+    <p>Created by <a href="https://megatirfan.com" target="_blank">Megat Irfan</a></p>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const successButton = document.getElementById('successButton');
+  const errorButton = document.getElementById('errorButton');
+  const loadingButton = document.getElementById('loadingButton');
+  const inputButton = document.getElementById('inputButton');
+  const confirmButton = document.getElementById('confirmButton');
+  const infoButton = document.getElementById('infoButton');
+  const customContentButton = document.getElementById('customContentButton');
+
+   // Success Button Click Event
+   successButton.addEventListener('click', function() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Success!',
+      text: 'Button clicked successfully.',
+    });
+  });
+
+  // Error Button Click Event
+  errorButton.addEventListener('click', function() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error!',
+      text: 'An error occurred.',
+    });
+  });
+
+  // Loading Button Click Event
+  loadingButton.addEventListener('click', function() {
+    Swal.fire({
+      title: 'Loading...',
+      allowOutsideClick: false,
+      showConfirmButton: false,
+      willOpen: () => {
+        Swal.showLoading();
+        setTimeout(() => {
+          Swal.close();
+        }, 3000); // Auto close after 3 seconds
+      },
+    });
+  });
+
+  // Show Input Button Click Event
+  inputButton.addEventListener('click', function() {
+    Swal.fire({
+      title: 'Enter Something',
+      input: 'text',
+      inputLabel: 'Your input',
+      showCancelButton: true,
+      confirmButtonText: 'Submit',
+      showLoaderOnConfirm: true,
+      preConfirm: (inputValue) => {
+        // You can process the input value here
+        return inputValue;
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'You entered:',
+          text: result.value,
+        });
+      }
+    });
+  });
+
+  // Confirm Button Click Event
+  confirmButton.addEventListener('click', function() {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "This action cannot be undone.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, do it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Action Confirmed!',
+          'The action has been completed.',
+          'success'
+        );
+      }
+    });
+  });
+
+  // Info Button Click Event
+  infoButton.addEventListener('click', function() {
+    Swal.fire({
+      title: 'Information',
+      text: 'This is an informative message.',
+      icon: 'info',
+    });
+  });
+
+  // Custom Content Button Click Event
+  customContentButton.addEventListener('click', function() {
+    Swal.fire({
+      title: 'Custom Content',
+      html: '<p>This is a custom content modal.</p><p><strong>It can contain HTML elements.</strong></p>',
+    });
+  });
+});
+</script>
+
+</body>
+</html>
